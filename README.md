@@ -1,2 +1,13 @@
-# snippets
-Snippets
+# Snippets
+## Ionic
+## Java
+## Javascript
+## jQuery
+## Linux
+## Oracle
+## Peoplesoft
+## PeopleCode
+## Splunk
+## SQL
+## Windows
+## Wordpress
