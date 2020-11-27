@@ -44,7 +44,7 @@ npm install -g @ionic/cli
 ionic start   <my_app_name>  <template> [options]
 ```
 
-| template	  | Description                                                                                              |
+| Template	  | Description                                                                                              |
 |-------------|----------------------------------------------------------------------------------------------------------|
 | tabs	      | A starting project with a simple tabbed interface                                                        |
 | blank	      | A blank starter project                                                                                  |
