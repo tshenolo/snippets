@@ -45,7 +45,7 @@ ionic start   <my_app_name>  <template> [options]
 ```
 
 | template	  | Description                                                                                              |
-|------------:|---------------------------------------------------------------------------------------------------------:|
+|-------------|----------------------------------------------------------------------------------------------------------|
 | tabs	      | A starting project with a simple tabbed interface                                                        |
 | blank	      | A blank starter project                                                                                  |
 | sidemenu    |	A starting project with a side menu with navigation in the content area                                  |
