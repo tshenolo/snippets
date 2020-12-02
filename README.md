@@ -100,14 +100,6 @@ npm install @types/jquery
 import * as $ from "jquery";
 ```
 
-### Java
-coming soon
-
-### Javascript
-coming soon
-
-### jQuery
-coming soon
 
 ### Linux
 #### Convert jpg to PDF (3 steps)
