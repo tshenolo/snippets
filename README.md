@@ -460,6 +460,17 @@ End-If;
    
 ```
 
+#### set the root log4j level
+Where standard levels are ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF
+```
+Function SetTraceOn
+   
+   GetJavaClass("org.apache.logging.log4j.core.config.Configurator").initialize(CreateJavaObject("org.apache.logging.log4j.core.config.DefaultConfiguration"));
+   GetJavaClass("org.apache.logging.log4j.core.config.Configurator").setRootLevel(GetJavaClass("org.apache.logging.log4j.Level").INFO);
+   
+End-Function;
+```
+
 ### SQL
 #### Alter Session
 ```
