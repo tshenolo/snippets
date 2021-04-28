@@ -461,7 +461,7 @@ End-If;
 ```
 
 #### Set the root log4j level
-Where standard levels are ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF
+Where standard levels are ALL < TRACE < DEBUG < INFO < WARN < ERROR < FATAL < OFF
 ```
 Function SetTraceOn
    
