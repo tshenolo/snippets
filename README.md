@@ -163,7 +163,7 @@ ssh-keyscan -t <dsa | rsa> <SERVER>
 
 
 ### PeopleCode
-### Compress Files
+#### Compress Files
 ```
 Function AddFileToZip(&zipInternalPath, &fileNameToZip, &zip)
    Local JavaObject &file = CreateJavaObject("java.io.File", &fileNameToZip);
