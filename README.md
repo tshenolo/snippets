@@ -163,6 +163,52 @@ ssh-keyscan -t <dsa | rsa> <SERVER>
 
 
 ### PeopleCode
+### Compress Files
+```
+Function AddFileToZip(&zipInternalPath, &fileNameToZip, &zip)
+   Local JavaObject &file = CreateJavaObject("java.io.File", &fileNameToZip);
+   REM ** We will read &fileNameToZip into a buffer and write it out to &zip;
+   Local JavaObject &buf = CreateJavaArray("byte[]", 1024);
+   
+   Local number &byteCount;
+   Local JavaObject &in = CreateJavaObject("java.io.FileInputStream", &fileNameToZip);
+   
+   rem Local JavaObject &zipEntry = CreateJavaObject("java.util.zip.ZipEntry", &zipInternalPath | "/" | &file.getName());
+   Local JavaObject &zipEntry = CreateJavaObject("java.util.zip.ZipEntry", &file.getName());
+   
+   REM ** Make sure zip entry retains original modified date;
+   &zipEntry.setTime(&file.lastModified());
+   
+   &zip.putNextEntry(&zipEntry);
+   
+   &byteCount = &in.read(&buf);
+   
+   While &byteCount > 0
+      &zip.write(&buf, 0, &byteCount);
+      &byteCount = &in.read(&buf);
+   End-While;
+   
+   &in.close();
+   
+   If &file.delete() Then
+      MessageBox(0, "", 0, 0, "File Deleted: " | &file.getName());
+   Else
+      MessageBox(0, "", 0, 0, "File Not Deleted: " | &file.getName());
+   End-If;
+   
+End-Function;
+
+
+Local JavaObject &zip = CreateJavaObject("java.util.zip.ZipOutputStream", CreateJavaObject("java.io.FileOutputStream", "/temp/testfiles.zip", True));
+
+AddFileToZip("folder1", "/temp/test1.txt", &zip);
+AddFileToZip("folder1", "/temp/test2.txt", &zip);
+
+&zip.flush();
+&zip.close();
+```
+
+
 #### Select a single row of data
 ```
 /* Read class name and parameter record name from the database. */ 
