@@ -1,0 +1,164 @@
+### SQL
+#### Alter Session
+```
+ALTER SESSION SET CURRENT_SCHEMA=SYSADM;
+```
+
+#### Unlock Account
+```
+ALTER USER oracledbuser ACCOUNT UNLOCK;
+```
+
+#### Create User with User Permissions
+```
+CREATE USER oracledbuser IDENTIFIED BY password
+QUOTA UNLIMITED ON SYSTEM
+QUOTA UNLIMITED ON SYSAUX;
+
+GRANT CREATE SESSION TO oracledbuser;
+
+GRANT CREATE TABLE TO oracledbuser;
+
+GRANT SELECT_CATALOG_ROLE TO oracledbuser; 
+
+GRANT EXECUTE_CATALOG_ROLE TO oracledbuser;
+
+EXECUTE DBMS_STREAMS_AUTH.GRANT_ADMIN_PRIVILEGE(grantee => 'oracledbuser');
+
+GRANT UNLIMITED TABLESPACE TO oracledbuser;
+
+GRANT RESOURCE TO oracledbuser;
+
+ALTER USER oracledbuser QUOTA unlimited ON system;
+
+GRANT UNLIMITED TABLESPACE TO oracledbuser;
+```
+
+#### Create table, Sequence, Trigger
+```
+CREATE TABLE "SOFTWARE" (
+"SOFTWARE_ID"      NUMBER(10,0) NOT NULL ENABLE,
+"SOFTWARE_VERSION" VARCHAR2(255 BYTE),
+"SOFTWARE_TITLE"   VARCHAR2(255 BYTE),
+"COMP_LAB"         NUMBER(10,0),
+PRIMARY KEY ("SOFTWARE_ID"));
+
+CREATE SEQUENCE SOFTWARE_SEQUENCE START WITH 1 INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER SOFTWARE_trigger
+BEFORE INSERT
+ON SOFTWARE
+REFERENCING NEW AS NEW
+FOR EACH ROW
+BEGIN
+SELECT SOFTWARE_SEQUENCE.nextval INTO :NEW.software_id FROM dual;
+END;
+```
+
+#### Drop all tables, constraints, and sequences in a Schema
+```
+BEGIN
+
+FOR c IN (SELECT table_name FROM user_tables) LOOP
+EXECUTE IMMEDIATE ('DROP TABLE ' || c.table_name || ' CASCADE CONSTRAINTS');
+END LOOP;
+
+FOR s IN (SELECT sequence_name FROM user_sequences) LOOP
+EXECUTE IMMEDIATE ('DROP SEQUENCE ' || s.sequence_name);
+END LOOP;
+
+END;
+```
+
+#### Grant select, insert, update, delete
+```
+GRANT SELECT, INSERT, UPDATE, DELETE ON SYSADM.TABLENAME TO PUBLIC;
+```
+
+#### How to Find PeopleSoft Processes/PSJobs in a Recurrence
+```
+SELECT PROCESS_JOB_NAME,
+  DESCRIPTION,
+  RECURNAME
+FROM PS_PRCSRECUR A,
+  (SELECT P.PRCSNAME AS PROCESS_JOB_NAME,
+    P.DESCR          AS DESCRIPTION,
+    P.RECURNAME      AS RECURNAME
+  FROM PS_PRCSDEFN P
+  UNION
+  SELECT JP.PRCSJOBAME AS PROCESS_JOB_NAME,
+    (SELECT J.DESCR FROM PS_PRCSDEFN J WHERE J.PRCSNAME = JP.PRCSNAME
+    )            AS DESCRIPTION,
+    JP.RECURNAME AS RECURNAME
+  FROM PS_PRCSJOBDEFN J,
+    PS_PRCSJOBITEM JP
+  WHERE J.PRCSJOBNAME = JP.PRCSJOBNAME
+  ) B
+WHERE B.RECURNAME = A.RECURNAME
+AND A.RECURNAME   = :1
+ORDER BY 1;
+```
+
+#### Find/Unlock PeopleSoft Objects
+```
+-- Find locked PeopleSoft Object
+SELECT * FROM PSCHGCTLLOCK WHERE OPRID = :UserId;
+
+-- Delete locked PeopleSoft Object
+DELETE FROM PSCHGCTLLOCK WHERE OPRID = :userId AND OBJECTVALUE1 = :ObjectName; 
+```
+
+#### Find navigations where a process is attached
+```
+SELECT A.PORTAL_URI_SEG2,
+    RTRIM(E.PORTAL_LABEL)
+    || ' >> '
+    || RTRIM(D.PORTAL_LABEL)
+    || ' >> '
+    || RTRIM(C.PORTAL_LABEL)
+    || ' >> '
+    || RTRIM(B.PORTAL_LABEL)
+    || ' >> '
+    || RTRIM(A.PORTAL_LABEL)
+  FROM PSPRSMDEFN A
+  LEFT JOIN PSPRSMDEFN B
+  ON B.PORTAL_NAME     = A.PORTAL_NAME
+  AND B.PORTAL_OBJNAME = A.PORTAL_PRNTOBJNAME
+  LEFT JOIN PSPRSMDEFN C
+  ON C.PORTAL_NAME     = B.PORTAL_NAME
+  AND C.PORTAL_OBJNAME = B.PORTAL_PRNTOBJNAME
+  LEFT JOIN PSPRSMDEFN D
+  ON D.PORTAL_NAME     = C.PORTAL_NAME
+  AND D.PORTAL_OBJNAME = C.PORTAL_PRNTOBJNAME
+  LEFT JOIN PSPRSMDEFN E
+  ON E.PORTAL_NAME         = D.PORTAL_NAME
+  AND E.PORTAL_OBJNAME     = D.PORTAL_PRNTOBJNAME
+  WHERE A.PORTAL_URI_SEG2 IN
+    (SELECT PNLGRPNAME FROM PS_PRCSDEFNPNL P WHERE P.PRCSNAME = :PROCESS_NAME );
+```
+
+#### Find Records and Fields used in a PeopleSoft Page
+```
+-- SQL Query to find all the Records and Fields used in a PeopleSoft page:
+SELECT RECNAME,
+  FIELDNAME
+FROM PSPNLFIELD
+WHERE PNLNAME = :PAGENAME;
+
+-- SQL Query to find all the Records where a particular PeopleSoft field is used:
+SELECT DISTINCT RECNAME,
+  FIELDNAME
+FROM PSRECFIELD
+WHERE FIELDNAME = :FIELDNAME;
+
+-- SQL query to find all the page names where a field is used from a particular record:
+SELECT PNLNAME
+FROM PSPNLFIELD
+WHERE RECNAME = :RECORDNAME
+AND FIELDNAME = :FIELDNAME;
+```
+
+#### Optional Prompts/Criteria
+```
+SELECT * FROM TABLENAME WHERE FIELDNAME = :1 OR TRIM(:1) IS NULL;
+```
