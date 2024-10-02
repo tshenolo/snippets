@@ -16,6 +16,22 @@ git checkout -b dev-feature
 git add <filename>
 ```
 
+### Check which files have changed on a remote server 
+You need to fetch the latest commits from the remote repository without merging them
+```
+git fetch origin
+```
+
+After fetching, you can compare your local branch with the remote branch to see which files have changed
+```
+git diff --name-only origin/main
+```
+
+If you want to see the actual changes in the files
+```
+git diff origin/main
+```
+
 ### Commit staged changes to the local repository
 ```
 git commit -m "<message>"
