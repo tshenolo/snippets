@@ -190,7 +190,74 @@ git diff --name-status origin/main..HEAD
 ```
 This shows file differences between your last commit and the remote branch.
 
+### Undo Unstaged Changes (Revert modified files)
+If you have modified files but haven't staged them yet, restore them to their last committed state:
 
+```
+git restore <file>
+```
+
+To restore all unstaged changes:
+```
+git restore .
+```
+
+### Undo Staged Changes (Unstage files but keep modifications)
+If you've already staged changes with git add, but want to unstage them:
+```
+git restore --staged <file>
+```
+
+To unstage all files:
+```
+git restore --staged .
+```
+
+### Undo Local Changes and Reset to Remote (Discard all local changes)
+If you want to completely reset your branch to match the remote:
+```
+git reset --hard origin/main
+```
+
+(Replace main with your branch name.)
+
+⚠ Warning: This will delete all local changes, including uncommitted work.
+
+### Undo the Last Commit (Keep changes unstaged)
+If you've committed but haven’t pushed yet and want to undo the commit but keep the changes:
+```
+git reset --soft HEAD~1
+```
+
+### Undo the Last Commit (Discard changes completely)
+If you want to remove the last commit and discard the changes completely:
+```
+git reset --hard HEAD~1
+```
+
+### Restore a Deleted File
+If you accidentally deleted a file and want to restore it:
+```
+git checkout -- <file>
+```
+or
+```
+git restore <file>
+```
+
+### Revert a Pushed Commit
+If you've already pushed a commit and need to undo it:
+```
+git revert <commit-hash>
+```
+This creates a new commit that undoes the changes, keeping history intact.
+
+### Reset to a Specific Commit
+If you need to reset your branch to a specific commit:
+```
+git reset --hard <commit-hash>
+```
+⚠ This will erase commits after the specified commit.
 
 
 
