@@ -60,7 +60,7 @@ git push origin --delete dev-feature
 git checkout main
 git fetch origin
 git pull origin main
-git checkout dev-feature
+git checkout -b dev-feature
 git rebase main
 ```
 
