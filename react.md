@@ -552,6 +552,3 @@ Install: `npm install react-router-dom`
 // }
 ```
 
-This provides a comprehensive React cheatsheet with actionable examples. I'll proceed with `vuejs.md`.The `react.md` cheatsheet has been successfully updated with detailed code snippets and explanations for core React concepts, JSX, components, props, state (with `useState`), lifecycle (with `useEffect`), event handling, conditional rendering, lists, forms, common hooks, Context API, and a basic example for React Router.
-
-Next, I will enhance `vuejs.md`, focusing on its template syntax, directives, reactivity, computed properties, watchers, components, props, events, slots, lifecycle hooks, and an introduction to the Composition API.
