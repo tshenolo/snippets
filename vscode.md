@@ -257,6 +257,3 @@ Define custom code snippets for faster coding.
     // ${1:i} is a tab stop with a placeholder.
     ```
 
-This provides a good set of common VSCode features and shortcuts. I'll proceed with `markdown.md`.The `vscode.md` cheatsheet has been successfully updated with detailed information on common shortcuts, features like the Command Palette, multi-cursor editing, integrated terminal, extensions, Git integration, debugging, settings (`settings.json`), and tasks (`tasks.json`), including example configurations.
-
-Next, I will enhance `markdown.md`. This will involve providing clearer examples for each Markdown syntax element, ensuring they render correctly and showcase common use cases. Since Markdown is primarily about syntax, the "commands" will be the syntax itself.
