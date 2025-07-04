@@ -345,6 +345,3 @@ SQLite supports full-text search via virtual table modules. FTS5 is the latest a
     ```
     *   FTS5 supports advanced queries (NEAR, PHRASE, boolean operators AND/OR/NOT).
 
-This provides a good level of detail for `sqlite.md`. I'll continue with `ssh.md` next.The `sqlite.md` cheatsheet has been successfully updated with detailed `sqlite3` CLI commands, SQL examples (DDL, DML, TCL), and common PRAGMA statements, formatted as requested.
-
-Next, I will enhance `ssh.md` with more specific command examples and explanations for various SSH functionalities.
