@@ -443,6 +443,3 @@ This cheatsheet provides common Bash commands and scripting constructs.
     ./your_script.sh
     ```
 
-This provides a good starting point for `bash.md`. I'll continue with the other command-heavy cheatsheets.Okay, I've enhanced `bash.md` with detailed commands, examples, and explanations, incorporating the observed formatting like triple backticks for commands and placeholders.
-
-I will now proceed to enhance the next command-heavy cheatsheet. Let's do `powershell.md`.
