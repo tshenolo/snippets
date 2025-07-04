@@ -597,6 +597,4 @@ Built-in variables that are always available in all scopes.
     // ini_set('error_log', '/path/to/php-error.log'); // Specify error log file
     ```
 
-This provides a comprehensive PHP cheatsheet. I'll proceed with `html_css.md`.The `php.md` cheatsheet has been successfully updated with detailed syntax examples for core PHP features, including data types, operators, control structures, functions (with type hinting and splat operator), array manipulations, string functions, superglobals, basic OOP concepts, and error handling.
 
-Next, I will enhance `html_css.md`, focusing on providing clear examples of common HTML tags, CSS selectors, properties, and layout techniques like Flexbox and Grid.
